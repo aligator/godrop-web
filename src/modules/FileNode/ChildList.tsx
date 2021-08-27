@@ -1,5 +1,7 @@
 import React, {useCallback, useMemo} from 'react';
 import {FileNodeState} from "./state";
+import {Col, DataTable, Row} from "../../components/DataTable";
+import {FileNode} from "../../api/types";
 
 interface Props {
     state: FileNodeState
@@ -10,37 +12,40 @@ export const ChildList: React.FC<Props> = ({state: {currentPath, change, back, n
         change(`${currentPath}/${newPath}`)
     }, [change, currentPath])
 
-    const list = useMemo(() => {
-        return (node?.getFileNode?.children || []).map((child) => {
-            if (child.isFolder) {
-                return (
-                    <li key={child.id}>
-                        <button onClick={createOnNavigateToChild(child.name)}>
-                            {child.name}
-                        </button>
-                    </li>
-                )
+    const columns: Col<FileNode>[] = useMemo(() => [
+        {
+            name: "Filename",
+            renderer: (r) => {
+                if (r.data.isFolder) {
+                    return <button onDoubleClick={createOnNavigateToChild(r.data.name)}>{r.data.name}</button>
+                }
+                return <>{r.data.name}</>
             }
+        },
+        {
+            name: "Type",
+            renderer: (r) => {
+                return <>{r.data.isFolder ? "Folder" : r.data.mimeType}</>
+            }
+        }
+    ], [createOnNavigateToChild])
 
-            return (
-                <li key={child.id}>
-                    {child.name}
-                </li>
-            )
-        })
-    }, [node, createOnNavigateToChild])
+    const data: Row<FileNode>[] = useMemo(() => (node?.getFileNode?.children || []).map((child) => {
+        return {
+            id: child.id,
+            data: child
+        }
+    }), [node])
 
     if (loading) {
         return <div>Loading...</div>
     }
 
     return (
-        <ul>
-            <li key="..">
-                <button onClick={back}>..</button>
-            </li>
-            {list}
-        </ul>
+        <>
+            <button onClick={back}>..</button>
+            <DataTable<FileNode> data={data} columns={columns}/>
+        </>
     )
 };
 
