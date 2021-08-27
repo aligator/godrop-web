@@ -1,0 +1,16 @@
+query GetFileNode($path: String!) {
+    getFileNode(path: $path) {
+        id,
+        name,
+        description,
+        isFolder,
+        mimeType,
+        children {
+            id,
+            name,
+            description,
+            isFolder,
+            mimeType,
+        }
+    }
+}
