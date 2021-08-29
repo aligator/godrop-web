@@ -1,6 +1,6 @@
 import React, {useCallback, useMemo} from 'react';
 import {FileNodeState} from "./state";
-import {Col, DataTable, Row} from "../../components/DataTable";
+import {Col, DataTable} from "../../components/DataTable";
 import {FileNode} from "../../api/types";
 
 interface Props {
@@ -8,34 +8,29 @@ interface Props {
 }
 
 export const ChildList: React.FC<Props> = ({state: {currentPath, change, back, node, loading}}) => {
-    const createOnNavigateToChild = useCallback((newPath: string) => () => {
+    const handleNavigateToChild = useCallback((newPath: string) => {
         change(`${currentPath}/${newPath}`)
     }, [change, currentPath])
 
     const columns: Col<FileNode>[] = useMemo(() => [
         {
+            id: "filename",
             name: "Filename",
-            renderer: (r) => {
-                if (r.data.isFolder) {
-                    return <button onDoubleClick={createOnNavigateToChild(r.data.name)}>{r.data.name}</button>
+            Cell: ({row, className}) => {
+                if (row.isFolder) {
+                    return <div className={className}>{row.name}</div>
                 }
-                return <>{r.data.name}</>
+                return <div className={className}>{row.name}</div>
             }
         },
         {
+            id: "type",
             name: "Type",
-            renderer: (r) => {
-                return <>{r.data.isFolder ? "Folder" : r.data.mimeType}</>
+            Cell: ({row, className}) => {
+                return <div className={className}>{row.isFolder ? "Folder" : row.mimeType}</div>
             }
         }
-    ], [createOnNavigateToChild])
-
-    const data: Row<FileNode>[] = useMemo(() => (node?.getFileNode?.children || []).map((child) => {
-        return {
-            id: child.id,
-            data: child
-        }
-    }), [node])
+    ], [])
 
     if (loading) {
         return <div>Loading...</div>
@@ -44,7 +39,14 @@ export const ChildList: React.FC<Props> = ({state: {currentPath, change, back, n
     return (
         <>
             <button onClick={back}>..</button>
-            <DataTable<FileNode> data={data} columns={columns}/>
+            <DataTable<FileNode>
+                getRowId={(r) => r.id}
+                data={node?.getFileNode?.children || []}
+                columns={columns}
+                rowProps={{
+                    onDoubleClick: row => row.isFolder ? () => handleNavigateToChild(row.name) : undefined
+                }}
+            />
         </>
     )
 };

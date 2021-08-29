@@ -9,10 +9,10 @@ function App() {
   return (
       <Layout header={<div>GoDrop</div>}>
           <div className="h-full flex flex-row">
-              <div className="flex-grow" style={{background: "red"}}>
+              <div className="flex-grow">
                   <ChildList state={nodeState} />
               </div>
-              <div style={{background: "green"}}>
+              <div>
                   Side bar
               </div>
           </div>
