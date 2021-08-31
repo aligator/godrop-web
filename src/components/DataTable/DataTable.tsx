@@ -23,7 +23,7 @@ interface Props<T> {
     };
 }
 
-function InternalDataTable<T>({columns, getRowId, Header=({name})=><>name</>, data, rowProps={}}: Props<T>) {
+function InternalDataTable<T>({columns, getRowId, Header=({name})=><>{name}</>, data, rowProps={}}: Props<T>) {
     const headers = useMemo(() => {
         return columns.map((col) => {
             return  (
