@@ -2,15 +2,23 @@ import React, {useCallback, useMemo} from 'react';
 import {FileNodeState} from "./state";
 import {Col, DataTable} from "../../components/DataTable";
 import {FileNode} from "../../api/types";
+import {useSideDrawer} from "../../components/SideDrawer";
 
 interface Props {
     state: FileNodeState
 }
 
 export const ChildList: React.FC<Props> = ({state: {currentPath, change, back, node, loading}}) => {
+    const { handleOpen } = useSideDrawer()
     const handleNavigateToChild = useCallback((newPath: string) => {
         change(`${currentPath}/${newPath}`)
     }, [change, currentPath])
+
+    const handleSelect = useCallback((row: FileNode) => {
+        handleOpen({
+            content: <div>{row.name}</div>
+        })
+    }, [handleOpen])
 
     const columns: Col<FileNode>[] = useMemo(() => [
         {
@@ -44,7 +52,8 @@ export const ChildList: React.FC<Props> = ({state: {currentPath, change, back, n
                 data={node?.getFileNode?.children || []}
                 columns={columns}
                 rowProps={{
-                    onDoubleClick: row => row.isFolder ? () => handleNavigateToChild(row.name) : undefined
+                    onDoubleClick: row => row.isFolder ? () => handleNavigateToChild(row.name) : undefined,
+                    onClick: row => () => handleSelect(row)
                 }}
             />
         </>
