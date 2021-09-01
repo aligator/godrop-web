@@ -40,7 +40,7 @@ export const SideDrawer: React.FC<Props> = ({children}) => {
 
     return (
         <>
-            <div className={`transform right-0 w-64 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 ${isOpen ? '' : 'translate-x-full'}`}>
+            <div className={`transform bg-neutralBgSofter border-2 border-neutralBg p-2 text-onNeutralBgSofter right-0 w-64 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 ${isOpen ? '' : 'translate-x-full'}`}>
                 <div className="flex flex-col flex-nowrap">
                     <div className="w-full flex flex-row flex-nowrap justify-end">
                         <button onClick={handleClose}>X</button>

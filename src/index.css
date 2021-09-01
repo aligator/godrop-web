@@ -1,3 +1,18 @@
+/* roboto-regular - latin */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url('fonts/roboto-v27-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local(''),
+        url('fonts/roboto-v27-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('fonts/roboto-v27-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+        url('fonts/roboto-v27-latin-regular.woff') format('woff'), /* Modern Browsers */
+        url('fonts/roboto-v27-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('fonts/roboto-v27-latin-regular.svg#Roboto') format('svg'); /* Legacy iOS */
+}
+
+
 :root {
     --color-primary-100: theme('colors.blue.100');
     --color-primary-200: theme('colors.blue.200');
@@ -18,30 +33,32 @@
     --color-neutral-700: theme('colors.gray.700');
     --color-neutral-800: theme('colors.gray.800');
     --color-neutral-900: theme('colors.gray.900');
+
+    --font-logo: Roboto, Helvetica, Arial, sans-serif;
 }
 
 @tailwind base;
 
 .theme-light {
-    --color-primaryBg: var(--color-primary-100);
-    --color-primaryBgSoft: var(--color-primary-200);
-    --color-primaryBgSofter: var(--color-primary-300);
-    --color-primarySoft: var(--color-primary-400);
-    --color-primary: var(--color-primary-500);
-    --color-primaryBold: var(--color-primary-600);
-    --color-onPrimaryBgSofter: var(--color-primary-700);
+    --color-primaryBg: var(--color-primary-400);
+    --color-primaryBgSoft: var(--color-primary-300);
+    --color-primaryBgSofter: var(--color-primary-200);
+    --color-primarySoft: var(--color-primary-100);
+    --color-primary: var(--color-primary-600);
+    --color-primaryBold: var(--color-primary-500);
+    --color-onPrimaryBgSofter: var(--color-primary-900);
     --color-onPrimaryBgSoft: var(--color-primary-800);
-    --color-onPrimaryBg: var(--color-primary-900);
+    --color-onPrimaryBg: var(--color-primary-700);
 
-    --color-neutralBg: var(--color-neutral-100);
-    --color-neutralBgSoft: var(--color-neutral-200);
-    --color-neutralBgSofter: var(--color-neutral-300);
-    --color-neutralSoft: var(--color-neutral-400);
-    --color-neutral: var(--color-neutral-500);
+    --color-neutralBg: var(--color-neutral-400);
+    --color-neutralBgSoft: var(--color-neutral-300);
+    --color-neutralBgSofter: var(--color-neutral-200);
+    --color-neutralSoft: var(--color-neutral-500);
+    --color-neutral: var(--color-neutral-400);
     --color-neutralBold: var(--color-neutral-600);
-    --color-onNeutralBgSofter: var(--color-neutral-700);
+    --color-onNeutralBgSofter: var(--color-neutral-900);
     --color-onNeutralBgSoft: var(--color-neutral-800);
-    --color-onNeutralBg: var(--color-neutral-900);
+    --color-onNeutralBg: var(--color-neutral-700);
 }
 .theme-dark {
     --color-onPrimaryBg: var(--color-primary-100);

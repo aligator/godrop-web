@@ -11,7 +11,7 @@ enum Theme {
 }
 
 export const Layout: React.FC<Props> = ({children, header}) => {
-    const [theme, setTheme] = useState(Theme.LIGHT);
+    const [theme, ] = useState(Theme.LIGHT);
 
     return (
         <div className={`flex flex-col h-screen ${theme}`}>

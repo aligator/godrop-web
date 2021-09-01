@@ -24,6 +24,10 @@ module.exports = {
         onNeutralBgSoft: 'var(--color-onNeutralBgSoft)',
         onNeutralBgSofter: 'var(--color-onNeutralBgSofter)',
       },
+      fontFamily: {
+        // Shown in the SocialBar component as font-open-sans
+        logo: 'var(--font-logo)',
+      },
     },
   },
   variants: {

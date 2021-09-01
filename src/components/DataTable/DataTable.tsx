@@ -1,4 +1,4 @@
-import React, {memo, MouseEvent, useCallback, useMemo} from 'react';
+import React, {memo, useCallback, useMemo} from 'react';
 
 // https://www.tutorialguruji.com/javascript/how-to-use-props-with-generics-with-react-memo/
 declare module "react" { // augment React types
@@ -30,7 +30,7 @@ function InternalDataTable<T>({columns, getRowId, Header=({name})=><>{name}</>, 
                 <th
                     key={col.name}
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium bg-primaryBgSoft text-onPrimaryBgSoft uppercase tracking-wider"
                 >
                     <Header name={col.name} />
                 </th>
@@ -45,7 +45,7 @@ function InternalDataTable<T>({columns, getRowId, Header=({name})=><>{name}</>, 
 
 
         return (
-            <tr key={getRowId(row)} className={onClick || onDoubleClick ? "cursor-pointer hover:bg-primaryBg" : ""}>
+            <tr key={getRowId(row)} className={onClick || onDoubleClick ? "cursor-pointer bg-neutralBgSoft text-onNeutralBgSoft hover:bg-primaryBgSofter hover:text-onPrimaryBgSofter" : ""}>
                 {columns.map((col) => {
                     return (
                         <td key={col.name}
@@ -53,13 +53,13 @@ function InternalDataTable<T>({columns, getRowId, Header=({name})=><>{name}</>, 
                             onClick={onClick}
                             onDoubleClick={onDoubleClick}
                         >
-                            <col.Cell className={onClick || onDoubleClick ? "cursor-pointer hover:text-onPrimaryBg" : ""} row={row} />
+                            <col.Cell className={onClick || onDoubleClick ? "cursor-pointer" : ""} row={row} />
                         </td>
                     )
                 })}
             </tr>
         )
-    }, [columns, getRowId])
+    }, [columns, getRowId, rowProps])
 
     const rows = useMemo(
         () => data.map(renderRow),
