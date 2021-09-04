@@ -11,6 +11,7 @@ export interface FileNodeStateProps {
 export interface FileNodeState {
     readonly currentPath: string
     readonly change: (newPath: string) => void
+    readonly reload: () => void
     readonly back: () => void
     readonly loading: boolean
     readonly node?: GetFileNodeQuery
@@ -19,7 +20,7 @@ export interface FileNodeState {
 export function useNodeState({initialPath}: FileNodeStateProps): FileNodeState {
     const [path, setPath] = useState(initialPath)
 
-    const { data, error, loading } = useGetFileNodeQuery({
+    const { data, error, loading, refetch } = useGetFileNodeQuery({
         variables: { path }
     });
 
@@ -38,6 +39,7 @@ export function useNodeState({initialPath}: FileNodeStateProps): FileNodeState {
     return {
         currentPath: path,
         change: setPath,
+        reload: refetch,
         back: navigateBack,
         loading,
         node: data,

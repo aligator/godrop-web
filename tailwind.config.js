@@ -4,25 +4,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: 'var(--color-primary)',
-        primarySoft: 'var(--color-primarySoft)',
-        primaryBold: 'var(--color-primaryBold)',
-        primaryBg: 'var(--color-primaryBg)',
-        primaryBgSoft: 'var(--color-primaryBgSoft)',
-        primaryBgSofter: 'var(--color-primaryBgSofter)',
-        onPrimaryBg: 'var(--color-onPrimaryBg)',
-        onPrimaryBgSoft: 'var(--color-onPrimaryBgSoft)',
-        onPrimaryBgSofter: 'var(--color-onPrimaryBgSofter)',
+        primaryBg: 'var(--color-primary-bg)',
+        primaryBgSoft: 'var(--color-primary-bg-soft)',
+        primaryBgSofter: 'var(--color-primary-bg-softer)',
+        onPrimaryBg: 'var(--color-on-primary-bg)',
+        onPrimaryBgSoft: 'var(--color-on-primary-bg-soft)',
+        onPrimaryBgSofter: 'var(--color-on-primary-bg-softer)',
 
-        neutralBg: 'var(--color-neutralBg)',
-        neutralBgSoft: 'var(--color-neutralBgSoft)',
-        neutralBgSofter: 'var(--color-neutralBgSofter)',
-        neutral: 'var(--color-neutral)',
-        neutralBold: 'var(--color-neutralBold)',
-        neutralSoft: 'var(--color-neutralSoft)',
-        onNeutralBg: 'var(--color-onNeutralBg)',
-        onNeutralBgSoft: 'var(--color-onNeutralBgSoft)',
-        onNeutralBgSofter: 'var(--color-onNeutralBgSofter)',
+        neutralBg: 'var(--color-neutral-bg)',
+        neutralBgSoft: 'var(--color-neutral-bg-soft)',
+        neutralBgSofter: 'var(--color-neutral-bg-softer)',
+        onNeutralBg: 'var(--color-on-neutral-bg)',
+        onNeutralBgSoft: 'var(--color-on-neutral-bg-soft)',
+        onNeutralBgSofter: 'var(--color-on-neutral-bg-softer)',
       },
       fontFamily: {
         // Shown in the SocialBar component as font-open-sans
@@ -31,7 +25,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      backgroundColor: ['active'],
+    },
   },
   plugins: [],
 }

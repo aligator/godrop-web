@@ -12,7 +12,6 @@
         url('fonts/roboto-v27-latin-regular.svg#Roboto') format('svg'); /* Legacy iOS */
 }
 
-
 :root {
     --color-primary-100: theme('colors.blue.100');
     --color-primary-200: theme('colors.blue.200');
@@ -40,47 +39,60 @@
 @tailwind base;
 
 .theme-light {
-    --color-primaryBg: var(--color-primary-400);
-    --color-primaryBgSoft: var(--color-primary-300);
-    --color-primaryBgSofter: var(--color-primary-200);
-    --color-primarySoft: var(--color-primary-100);
-    --color-primary: var(--color-primary-600);
-    --color-primaryBold: var(--color-primary-500);
-    --color-onPrimaryBgSofter: var(--color-primary-900);
-    --color-onPrimaryBgSoft: var(--color-primary-800);
-    --color-onPrimaryBg: var(--color-primary-700);
+    --color-primary-bg: var(--color-primary-400);
+    --color-primary-bg-soft: var(--color-primary-300);
+    --color-primary-bg-softer: var(--color-primary-200);
+    --color-on-primary-bg-softer: var(--color-primary-900);
+    --color-on-primary-bg-soft: var(--color-primary-800);
+    --color-on-primary-bg: var(--color-primary-700);
 
-    --color-neutralBg: var(--color-neutral-400);
-    --color-neutralBgSoft: var(--color-neutral-300);
-    --color-neutralBgSofter: var(--color-neutral-200);
-    --color-neutralSoft: var(--color-neutral-500);
-    --color-neutral: var(--color-neutral-400);
-    --color-neutralBold: var(--color-neutral-600);
-    --color-onNeutralBgSofter: var(--color-neutral-900);
-    --color-onNeutralBgSoft: var(--color-neutral-800);
-    --color-onNeutralBg: var(--color-neutral-700);
+    --color-neutral-bg: var(--color-neutral-500);
+    --color-neutral-bg-soft: var(--color-neutral-400);
+    --color-neutral-bg-softer: var(--color-neutral-300);
+    --color-on-neutral-bg-softer: var(--color-neutral-900);
+    --color-on-neutral-bg-soft: var(--color-neutral-800);
+    --color-on-neutral-bg: var(--color-neutral-700);
 }
 .theme-dark {
-    --color-onPrimaryBg: var(--color-primary-100);
-    --color-onPrimaryBgSoft: var(--color-primary-300);
-    --color-onPrimaryBgSofter: var(--color-primary-400);
-    --color-primaryBold: var(--color-primary-600);
-    --color-primary: var(--color-primary-800);
-    --color-primarySoft: var(--color-primary-900);
-    --color-primaryBgSofter: var(--color-primary-900);
-    --color-primaryBgSoft: var(--color-primary-900);
-    --color-primaryBg: var(--color-primary-900);
+    --color-primary-bg: var(--color-primary-200);
+    --color-primary-bg-soft: var(--color-primary-300);
+    --color-primary-bg-softer: var(--color-primary-400);
+    --color-on-primary-bg-softer: var(--color-primary-700);
+    --color-on-primary-bg-soft: var(--color-primary-800);
+    --color-on-primary-bg: var(--color-primary-900);
 
-    --color-neutralBg: var(--color-neutral-800);
-    --color-neutralBgSoft: var(--color-neutral-700);
-    --color-neutralBgSofter: var(--color-neutral-600);
-    --color-neutralSoft: var(--color-neutral-500);
-    --color-neutral: var(--color-neutral-400);
-    --color-neutralBold: var(--color-neutral-300);
-    --color-onNeutralBgSofter: var(--color-neutral-200);
-    --color-onNeutralBgSoft: var(--color-neutral-100);
-    --color-onNeutralBg: var(--color-neutral-100);
+    --color-neutral-bg: var(--color-neutral-300);
+    --color-neutral-bg-soft: var(--color-neutral-400);
+    --color-neutral-bg-softer: var(--color-neutral-500);
+    --color-on-neutral-bg-softer: var(--color-neutral-700);
+    --color-on-neutral-bg-soft: var(--color-neutral-800);
+    --color-on-neutral-bg: var(--color-neutral-900);
 }
 
 @tailwind components;
 @tailwind utilities;
+
+
+.primary {
+    @apply bg-primaryBg text-onPrimaryBg;
+}
+
+.primary-soft {
+    @apply bg-primaryBgSoft text-onPrimaryBgSoft;
+}
+
+.primary-softer {
+    @apply bg-primaryBgSofter text-onPrimaryBgSofter;
+}
+
+.neutral {
+    @apply bg-neutralBg text-onNeutralBg;
+}
+
+.neutral-soft {
+    @apply bg-neutralBgSoft text-onNeutralBgSoft;
+}
+
+.neutral-softer {
+    @apply bg-neutralBgSofter text-onNeutralBgSofter;
+}

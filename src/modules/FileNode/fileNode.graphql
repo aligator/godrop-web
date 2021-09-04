@@ -1,0 +1,15 @@
+fragment FileNode on FileNode {
+    id,
+    name,
+    description,
+    isFolder,
+    mimeType,
+    size,
+}
+
+fragment FileNodeWithChildren on FileNode {
+    ...FileNode
+    children {
+        ...FileNode
+    }
+}

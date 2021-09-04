@@ -1,0 +1,5 @@
+mutation CreateFileNode($meta: CreateFileNode!, $file: Upload) {
+    createFileNode(meta: $meta, file: $file) {
+        ...FileNode
+    }
+}

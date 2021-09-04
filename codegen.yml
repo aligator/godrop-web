@@ -1,4 +1,5 @@
-schema: http://localhost:8080/schema.graphql
+schema:
+  - http://localhost:8080/schema.graphql
 documents: ./src/**/*.graphql
 generates:
   ./src/api/types.ts:
@@ -8,3 +9,6 @@ generates:
       - typescript-react-apollo
     config:
       withHooks: true
+      scalars:
+        Int64: number
+        Upload: File

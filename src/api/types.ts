@@ -12,14 +12,16 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Int64: number;
+  Upload: File;
 };
 
 export type CreateFileNode = {
   name: Scalars['String'];
+  path: Scalars['String'];
   description: Scalars['String'];
   isFolder: Scalars['Boolean'];
   mimeType?: Maybe<Scalars['String']>;
-  file?: Maybe<Scalars['String']>;
 };
 
 export type FileNode = {
@@ -29,8 +31,10 @@ export type FileNode = {
   description: Scalars['String'];
   isFolder: Scalars['Boolean'];
   mimeType?: Maybe<Scalars['String']>;
+  size: Scalars['Int64'];
   children?: Maybe<Array<FileNode>>;
 };
+
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -39,7 +43,8 @@ export type Mutation = {
 
 
 export type MutationCreateFileNodeArgs = {
-  input: CreateFileNode;
+  meta: CreateFileNode;
+  file?: Maybe<Scalars['Upload']>;
 };
 
 export type Query = {
@@ -52,32 +57,85 @@ export type QueryGetFileNodeArgs = {
   path: Scalars['String'];
 };
 
+
+export type CreateFileNodeMutationVariables = Exact<{
+  meta: CreateFileNode;
+  file?: Maybe<Scalars['Upload']>;
+}>;
+
+
+export type CreateFileNodeMutation = { __typename?: 'Mutation', createFileNode: { __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, mimeType?: Maybe<string>, size: number } };
+
+export type FileNodeFragment = { __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, mimeType?: Maybe<string>, size: number };
+
+export type FileNodeWithChildrenFragment = { __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, mimeType?: Maybe<string>, size: number, children?: Maybe<Array<{ __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, mimeType?: Maybe<string>, size: number }>> };
+
 export type GetFileNodeQueryVariables = Exact<{
   path: Scalars['String'];
 }>;
 
 
-export type GetFileNodeQuery = { __typename?: 'Query', getFileNode: { __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, mimeType?: Maybe<string>, children?: Maybe<Array<{ __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, mimeType?: Maybe<string> }>> } };
+export type GetFileNodeQuery = { __typename?: 'Query', getFileNode: { __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, mimeType?: Maybe<string>, size: number, children?: Maybe<Array<{ __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, mimeType?: Maybe<string>, size: number }>> } };
 
+export const FileNodeFragmentDoc = gql`
+    fragment FileNode on FileNode {
+  id
+  name
+  description
+  isFolder
+  mimeType
+  size
+}
+    `;
+export const FileNodeWithChildrenFragmentDoc = gql`
+    fragment FileNodeWithChildren on FileNode {
+  ...FileNode
+  children {
+    ...FileNode
+  }
+}
+    ${FileNodeFragmentDoc}`;
+export const CreateFileNodeDocument = gql`
+    mutation CreateFileNode($meta: CreateFileNode!, $file: Upload) {
+  createFileNode(meta: $meta, file: $file) {
+    ...FileNode
+  }
+}
+    ${FileNodeFragmentDoc}`;
+export type CreateFileNodeMutationFn = Apollo.MutationFunction<CreateFileNodeMutation, CreateFileNodeMutationVariables>;
 
+/**
+ * __useCreateFileNodeMutation__
+ *
+ * To run a mutation, you first call `useCreateFileNodeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateFileNodeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createFileNodeMutation, { data, loading, error }] = useCreateFileNodeMutation({
+ *   variables: {
+ *      meta: // value for 'meta'
+ *      file: // value for 'file'
+ *   },
+ * });
+ */
+export function useCreateFileNodeMutation(baseOptions?: Apollo.MutationHookOptions<CreateFileNodeMutation, CreateFileNodeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateFileNodeMutation, CreateFileNodeMutationVariables>(CreateFileNodeDocument, options);
+      }
+export type CreateFileNodeMutationHookResult = ReturnType<typeof useCreateFileNodeMutation>;
+export type CreateFileNodeMutationResult = Apollo.MutationResult<CreateFileNodeMutation>;
+export type CreateFileNodeMutationOptions = Apollo.BaseMutationOptions<CreateFileNodeMutation, CreateFileNodeMutationVariables>;
 export const GetFileNodeDocument = gql`
     query GetFileNode($path: String!) {
   getFileNode(path: $path) {
-    id
-    name
-    description
-    isFolder
-    mimeType
-    children {
-      id
-      name
-      description
-      isFolder
-      mimeType
-    }
+    ...FileNodeWithChildren
   }
 }
-    `;
+    ${FileNodeWithChildrenFragmentDoc}`;
 
 /**
  * __useGetFileNodeQuery__
