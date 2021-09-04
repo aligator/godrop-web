@@ -33,7 +33,7 @@ export const UploadButton: React.FC<Props> = ({state: {currentPath, reload}}) =>
 
         createFileNodeMutation({
             variables: {
-                file: selectedFile,
+                file: newFile,
                 meta: {
                     path: currentPath,
                     name: selectedFile.name,

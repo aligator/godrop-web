@@ -1,0 +1,7 @@
+.toggle-checkbox:checked {
+    @apply: right-0 border-bg-primaryBg border-primaryBgSofter;
+    right: 0;
+}
+.toggle-checkbox:checked + .toggle-label {
+    @apply: bg-primaryBg border-primaryBgSofter;
+}

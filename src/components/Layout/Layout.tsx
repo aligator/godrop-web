@@ -1,4 +1,5 @@
 import React, {useCallback, useState} from 'react';
+import { Switch } from '../Switch';
 
 interface Props {
     children: React.ReactNode
@@ -27,8 +28,11 @@ export const Layout: React.FC<Props> = ({children, header}) => {
 
     return (
         <div className={`flex flex-col h-screen ${theme}`}>
-            <header className="flex flex-row">
-                <div className="flex-1">{header}</div> <button onClick={switchTheme}>Switch</button>
+            <header className="flex flex-row  bg-primaryBg text-onPrimaryBg ">
+                <div className="flex-1">{header}</div> 
+                <div className="flex items-center mr-2">
+                    <Switch checked={theme === Theme.LIGHT} onChange={switchTheme} />
+                </div>
             </header>
             <div className="flex-1">
                 {children}
