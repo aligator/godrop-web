@@ -3,7 +3,7 @@ import {Header} from "../components/Header";
 import {SideDrawer} from "../components/SideDrawer";
 import {ChildList, useNodeState} from "../modules/FileNode";
 import {Layout} from "../components/Layout";
-import {UploadButton} from "../modules/FileNode/UploadButton";
+import {ActionToolbar} from "../modules/FileNode/ActionToolbar";
 
 interface Props {
 }
@@ -13,13 +13,13 @@ export const FileExplorerPage: React.FC<Props> = ({}) => {
 
     return (
         <Layout header={<Header />}>
-            <div className="h-full flex flex-row bg-neutralBgSofter text-onNeutralBgSofter">
+                <ActionToolbar state={selectedNode}/>
+                <div className="h-full flex flex-row bg-base-100 text-base-content">
                 <SideDrawer>
                     <div className="flex-grow">
                         <ChildList state={selectedNode} />
                     </div>
                 </SideDrawer>
-                <UploadButton state={selectedNode} />
             </div>
         </Layout>
     )

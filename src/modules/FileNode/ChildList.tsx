@@ -8,7 +8,7 @@ interface Props {
     state: FileNodeState
 }
 
-export const ChildList: React.FC<Props> = ({state: {currentPath, change, back, node, loading}}) => {
+export const ChildList: React.FC<Props> = ({state: {currentPath, change, node, loading}}) => {
     const { handleOpen } = useSideDrawer()
     const handleNavigateToChild = useCallback((newPath: string) => {
         change(`${currentPath}/${newPath}`)
@@ -46,7 +46,6 @@ export const ChildList: React.FC<Props> = ({state: {currentPath, change, back, n
 
     return (
         <>
-            <button onClick={back}>..</button>
             <DataTable<FileNode>
                 getRowId={(r) => r.id}
                 data={node?.getFileNode?.children || []}

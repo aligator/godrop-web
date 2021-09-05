@@ -30,7 +30,7 @@ function InternalDataTable<T>({columns, getRowId, Header=({name})=><>{name}</>, 
                 <th
                     key={col.name}
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium bg-primaryBgSoft text-onPrimaryBgSoft uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium bg-base-300 text-base-content uppercase tracking-wider"
                 >
                     <Header name={col.name} />
                 </th>
@@ -45,7 +45,7 @@ function InternalDataTable<T>({columns, getRowId, Header=({name})=><>{name}</>, 
 
 
         return (
-            <tr key={getRowId(row)} className={onClick || onDoubleClick ? "cursor-pointer bg-neutralBgSoft text-onNeutralBgSoft hover:bg-primaryBgSofter hover:text-onPrimaryBgSofter" : ""}>
+            <tr key={getRowId(row)} className={onClick || onDoubleClick ? "cursor-pointer bg-base-200 text-base-content hover:bg-accent-focus hover:text-accent-content" : ""}>
                 {columns.map((col) => {
                     return (
                         <td key={col.name}
@@ -67,13 +67,13 @@ function InternalDataTable<T>({columns, getRowId, Header=({name})=><>{name}</>, 
     )
 
     return (
-        <table className="w-full divide-y divide-neutralBgSoft">
-            <thead className="bg-neutralBg">
+        <table className="w-full divide-y bg-divide-neutral text-divide-neutral-content">
+            <thead className="bg-base-300 text-base-content">
                 <tr>
                     {headers}
                 </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-neutralBgSofter">
+            <tbody className="bg-white divide-y">
                 {rows}
             </tbody>
         </table>

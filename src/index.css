@@ -13,86 +13,9 @@
 }
 
 :root {
-    --color-primary-100: theme('colors.blue.100');
-    --color-primary-200: theme('colors.blue.200');
-    --color-primary-300: theme('colors.blue.300');
-    --color-primary-400: theme('colors.blue.400');
-    --color-primary-500: theme('colors.blue.500');
-    --color-primary-600: theme('colors.blue.600');
-    --color-primary-700: theme('colors.blue.700');
-    --color-primary-800: theme('colors.blue.800');
-    --color-primary-900: theme('colors.blue.900');
-
-    --color-neutral-100: theme('colors.gray.100');
-    --color-neutral-200: theme('colors.gray.200');
-    --color-neutral-300: theme('colors.gray.300');
-    --color-neutral-400: theme('colors.gray.400');
-    --color-neutral-500: theme('colors.gray.500');
-    --color-neutral-600: theme('colors.gray.600');
-    --color-neutral-700: theme('colors.gray.700');
-    --color-neutral-800: theme('colors.gray.800');
-    --color-neutral-900: theme('colors.gray.900');
-
     --font-logo: Roboto, Helvetica, Arial, sans-serif;
 }
 
 @tailwind base;
-
-.theme-light {
-    --color-primary-bg: var(--color-primary-400);
-    --color-primary-bg-soft: var(--color-primary-300);
-    --color-primary-bg-softer: var(--color-primary-200);
-    --color-on-primary-bg-softer: var(--color-primary-900);
-    --color-on-primary-bg-soft: var(--color-primary-800);
-    --color-on-primary-bg: var(--color-primary-700);
-
-    --color-neutral-bg: var(--color-neutral-500);
-    --color-neutral-bg-soft: var(--color-neutral-400);
-    --color-neutral-bg-softer: var(--color-neutral-300);
-    --color-on-neutral-bg-softer: var(--color-neutral-900);
-    --color-on-neutral-bg-soft: var(--color-neutral-800);
-    --color-on-neutral-bg: var(--color-neutral-700);
-}
-.theme-dark {
-    --color-primary-bg: var(--color-primary-200);
-    --color-primary-bg-soft: var(--color-primary-300);
-    --color-primary-bg-softer: var(--color-primary-400);
-    --color-on-primary-bg-softer: var(--color-primary-700);
-    --color-on-primary-bg-soft: var(--color-primary-800);
-    --color-on-primary-bg: var(--color-primary-900);
-
-    --color-neutral-bg: var(--color-neutral-300);
-    --color-neutral-bg-soft: var(--color-neutral-400);
-    --color-neutral-bg-softer: var(--color-neutral-500);
-    --color-on-neutral-bg-softer: var(--color-neutral-700);
-    --color-on-neutral-bg-soft: var(--color-neutral-800);
-    --color-on-neutral-bg: var(--color-neutral-900);
-}
-
 @tailwind components;
 @tailwind utilities;
-
-
-.primary {
-    @apply bg-primaryBg text-onPrimaryBg;
-}
-
-.primary-soft {
-    @apply bg-primaryBgSoft text-onPrimaryBgSoft;
-}
-
-.primary-softer {
-    @apply bg-primaryBgSofter text-onPrimaryBgSofter;
-}
-
-.neutral {
-    @apply bg-neutralBg text-onNeutralBg;
-}
-
-.neutral-soft {
-    @apply bg-neutralBgSoft text-onNeutralBgSoft;
-}
-
-.neutral-softer {
-    @apply bg-neutralBgSofter text-onNeutralBgSofter;
-}

@@ -54,7 +54,7 @@ export const UploadButton: React.FC<Props> = ({state: {currentPath, reload}}) =>
     return (
         <>
             <input ref={inputRef} className="hidden" type="file" onChange={handleFileChange} />
-            <IconButton icon={faPlus} onClick={handleUpload}>Upload</IconButton>
+            <IconButton className={"btn-primary"} icon={faPlus} onClick={handleUpload}>Upload</IconButton>
         </>
     )
 };

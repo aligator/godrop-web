@@ -28,10 +28,10 @@ export const Layout: React.FC<Props> = ({children, header}) => {
 
     return (
         <div className={`flex flex-col h-screen ${theme}`}>
-            <header className="flex flex-row  bg-primaryBg text-onPrimaryBg ">
+            <header className="flex flex-row bg-accent text-bg-accent-content">
                 <div className="flex-1">{header}</div> 
                 <div className="flex items-center mr-2">
-                    <Switch checked={theme === Theme.LIGHT} onChange={switchTheme} />
+                    <Switch checked={theme === Theme.DARK} onChange={switchTheme} />
                 </div>
             </header>
             <div className="flex-1">
