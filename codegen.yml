@@ -11,4 +11,3 @@ generates:
       withHooks: true
       scalars:
         Int64: number
-        Upload: File

@@ -3,6 +3,7 @@ fragment FileNode on FileNode {
     name,
     description,
     isFolder,
+    state,
     mimeType,
     size,
 }

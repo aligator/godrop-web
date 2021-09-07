@@ -13,7 +13,6 @@ export type Scalars = {
   Int: number;
   Float: number;
   Int64: number;
-  Upload: File;
 };
 
 export type CreateFileNode = {
@@ -30,6 +29,7 @@ export type FileNode = {
   name: Scalars['String'];
   description: Scalars['String'];
   isFolder: Scalars['Boolean'];
+  state: NodeState;
   mimeType?: Maybe<Scalars['String']>;
   size: Scalars['Int64'];
   children?: Maybe<Array<FileNode>>;
@@ -44,8 +44,12 @@ export type Mutation = {
 
 export type MutationCreateFileNodeArgs = {
   meta: CreateFileNode;
-  file?: Maybe<Scalars['Upload']>;
 };
+
+export enum NodeState {
+  Upload = 'UPLOAD',
+  Ready = 'READY'
+}
 
 export type Query = {
   __typename?: 'Query';
@@ -57,25 +61,23 @@ export type QueryGetFileNodeArgs = {
   path: Scalars['String'];
 };
 
-
 export type CreateFileNodeMutationVariables = Exact<{
   meta: CreateFileNode;
-  file?: Maybe<Scalars['Upload']>;
 }>;
 
 
-export type CreateFileNodeMutation = { __typename?: 'Mutation', createFileNode: { __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, mimeType?: Maybe<string>, size: number } };
+export type CreateFileNodeMutation = { __typename?: 'Mutation', createFileNode: { __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, state: NodeState, mimeType?: Maybe<string>, size: number } };
 
-export type FileNodeFragment = { __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, mimeType?: Maybe<string>, size: number };
+export type FileNodeFragment = { __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, state: NodeState, mimeType?: Maybe<string>, size: number };
 
-export type FileNodeWithChildrenFragment = { __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, mimeType?: Maybe<string>, size: number, children?: Maybe<Array<{ __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, mimeType?: Maybe<string>, size: number }>> };
+export type FileNodeWithChildrenFragment = { __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, state: NodeState, mimeType?: Maybe<string>, size: number, children?: Maybe<Array<{ __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, state: NodeState, mimeType?: Maybe<string>, size: number }>> };
 
 export type GetFileNodeQueryVariables = Exact<{
   path: Scalars['String'];
 }>;
 
 
-export type GetFileNodeQuery = { __typename?: 'Query', getFileNode: { __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, mimeType?: Maybe<string>, size: number, children?: Maybe<Array<{ __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, mimeType?: Maybe<string>, size: number }>> } };
+export type GetFileNodeQuery = { __typename?: 'Query', getFileNode: { __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, state: NodeState, mimeType?: Maybe<string>, size: number, children?: Maybe<Array<{ __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, state: NodeState, mimeType?: Maybe<string>, size: number }>> } };
 
 export const FileNodeFragmentDoc = gql`
     fragment FileNode on FileNode {
@@ -83,6 +85,7 @@ export const FileNodeFragmentDoc = gql`
   name
   description
   isFolder
+  state
   mimeType
   size
 }
@@ -96,8 +99,8 @@ export const FileNodeWithChildrenFragmentDoc = gql`
 }
     ${FileNodeFragmentDoc}`;
 export const CreateFileNodeDocument = gql`
-    mutation CreateFileNode($meta: CreateFileNode!, $file: Upload) {
-  createFileNode(meta: $meta, file: $file) {
+    mutation CreateFileNode($meta: CreateFileNode!) {
+  createFileNode(meta: $meta) {
     ...FileNode
   }
 }
@@ -118,7 +121,6 @@ export type CreateFileNodeMutationFn = Apollo.MutationFunction<CreateFileNodeMut
  * const [createFileNodeMutation, { data, loading, error }] = useCreateFileNodeMutation({
  *   variables: {
  *      meta: // value for 'meta'
- *      file: // value for 'file'
  *   },
  * });
  */

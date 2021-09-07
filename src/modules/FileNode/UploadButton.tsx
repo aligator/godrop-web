@@ -3,6 +3,7 @@ import {useCreateFileNodeMutation} from "../../api/types";
 import {IconButton} from "../../components/Button";
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import {FileNodeState} from "./state";
+import {upload} from "../../api/file";
 
 interface Props {
     state: FileNodeState
@@ -28,12 +29,8 @@ export const UploadButton: React.FC<Props> = ({state: {currentPath, reload}}) =>
         const newFile = selectedFile
         setSelectedFile(undefined)
 
-        console.log("currentPath", currentPath, selectedFile.name)
-
-
         createFileNodeMutation({
             variables: {
-                file: newFile,
                 meta: {
                     path: currentPath,
                     name: selectedFile.name,
@@ -42,6 +39,8 @@ export const UploadButton: React.FC<Props> = ({state: {currentPath, reload}}) =>
                     mimeType: selectedFile.type
                 }
             }
+        }).then(reload).then(() => {
+            return upload(`${currentPath}/${selectedFile.name}`, newFile)
         }).then(reload)
     }, [selectedFile, createFileNodeMutation, currentPath, reload])
 
