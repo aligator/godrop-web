@@ -13,8 +13,8 @@ export const FileExplorerPage: React.FC<Props> = ({}) => {
 
     return (
         <Layout header={<Header />}>
-                <ActionToolbar state={selectedNode}/>
-                <div className="h-full flex flex-row bg-base-100 text-base-content">
+            <ActionToolbar state={selectedNode}/>
+                <div className="flex flex-row bg-base-100 text-base-content">
                 <SideDrawer>
                     <div className="flex-grow">
                         <ChildList state={selectedNode} />

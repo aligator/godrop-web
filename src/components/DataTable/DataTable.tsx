@@ -41,8 +41,6 @@ function InternalDataTable<T>({columns, getRowId, Header=({name})=><>{name}</>, 
         const onClick = rowProps?.onClick && rowProps.onClick(row)
         const onDoubleClick = rowProps?.onDoubleClick && rowProps.onDoubleClick(row)
 
-
-
         return (
             <tr key={getRowId(row)} className={onClick || onDoubleClick ? "hover" : ""}>
                 {columns.map((col) => {
