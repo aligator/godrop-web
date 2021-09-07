@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import {
     GetFileNodeQuery,
     useGetFileNodeQuery
@@ -36,10 +36,12 @@ export function useNodeState({initialPath}: FileNodeStateProps): FileNodeState {
         })
     }
 
+    const reload = useCallback(() => refetch({path}), [refetch, path])
+
     return {
         currentPath: path,
         change: setPath,
-        reload: refetch,
+        reload: reload,
         back: navigateBack,
         loading,
         node: data,
