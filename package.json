@@ -5,6 +5,8 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "build:go": "mkdir -p dist && go build -o dist .",
+    "build:full": "yarn build && yarn build:go",
     "test": "craco test",
     "eject": "react-scripts eject",
     "generate": "graphql-codegen"
