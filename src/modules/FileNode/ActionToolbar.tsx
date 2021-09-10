@@ -14,8 +14,8 @@ export const ActionToolbar: React.FC<Props> = ({state}) => {
 
     return (
         <div className={"flex flex-row bg-base-200"}>
-            <IconButton className="btn-primary" icon={faSync} onClick={reload} />
             <IconButton className="btn-primary" icon={faBackward} onClick={back} />
+            <IconButton className="btn-primary" icon={faSync} onClick={reload} />
             <UploadButton state={state} />
             <CreateFolderButton state={state} />
         </div>

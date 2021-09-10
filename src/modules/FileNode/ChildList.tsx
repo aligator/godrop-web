@@ -3,6 +3,9 @@ import {FileNodeState} from "./state";
 import {Col, DataTable} from "../../components/DataTable";
 import {FileNode} from "../../api/types";
 import {useSideDrawer} from "../../components/SideDrawer";
+import {IconButton} from "../../components/Button";
+import { faDownload } from '@fortawesome/free-solid-svg-icons'
+import {download} from "../../api/file";
 
 interface Props {
     state: FileNodeState
@@ -20,7 +23,19 @@ export const ChildList: React.FC<Props> = ({state: {currentPath, change, node, l
         })
     }, [handleOpen])
 
+    const handleDownload = useCallback((row: FileNode) => () => download(row), [])
+
     const columns: Col<FileNode>[] = useMemo(() => [
+        {
+            id: "download",
+            name: "Download",
+            Cell: ({row, className}) => {
+                if (row.isFolder) {
+                    return <></>
+                }
+                return <IconButton icon={faDownload} onClick={handleDownload(row)} />
+            }
+        },
         {
             id: "filename",
             name: "Filename",
