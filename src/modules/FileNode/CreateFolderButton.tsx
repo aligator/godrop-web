@@ -1,8 +1,8 @@
-import React, {ChangeEvent, createRef, useCallback, useEffect, useState} from 'react';
+import React, {ChangeEvent, useCallback, useState} from 'react';
 import {useCreateFileNodeMutation} from "../../api/types";
-import {IconButton} from "../../components/Button";
 import {faFolderPlus} from '@fortawesome/free-solid-svg-icons'
 import {FileNodeState} from "./state";
+import {InputButton} from "../../components/InputButton";
 
 interface Props {
     state: FileNodeState
@@ -37,10 +37,18 @@ export const CreateFolderButton: React.FC<Props> = ({state: {currentPath, reload
     }, [folderName, createFileNodeMutation, currentPath, reload])
 
     return (
-        <>
-            <IconButton className={"btn-primary"} icon={faFolderPlus} onClick={handleCreate}>Upload</IconButton>
-            <input className={"input-primary"} value={folderName} placeholder={"Folder name"} onChange={handleFolderNameChange} />
-        </>
+        <InputButton
+            inputProps={{
+                className: "input-primary",
+                value: folderName,
+                onChange: handleFolderNameChange,
+                placeholder: "Folder name"
+            }}
+            iconButtonProps={{
+                className: "btn-primary",
+                icon: faFolderPlus,
+                onClick: handleCreate
+            }} />
     )
 };
 
