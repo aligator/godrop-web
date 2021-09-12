@@ -39,11 +39,24 @@ export type FileNode = {
 export type Mutation = {
   __typename?: 'Mutation';
   createFileNode: FileNode;
+  removeFileNode: Scalars['ID'];
+  updateFileNode: FileNode;
 };
 
 
 export type MutationCreateFileNodeArgs = {
   meta: CreateFileNode;
+};
+
+
+export type MutationRemoveFileNodeArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationUpdateFileNodeArgs = {
+  id: Scalars['ID'];
+  newMeta: UpdateFileNode;
 };
 
 export enum NodeState {
@@ -59,6 +72,11 @@ export type Query = {
 
 export type QueryGetFileNodeArgs = {
   path: Scalars['String'];
+};
+
+export type UpdateFileNode = {
+  name?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
 };
 
 export type CreateFileNodeMutationVariables = Exact<{
@@ -78,6 +96,13 @@ export type GetFileNodeQueryVariables = Exact<{
 
 
 export type GetFileNodeQuery = { __typename?: 'Query', getFileNode: { __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, state: NodeState, mimeType?: Maybe<string>, size: number, children?: Maybe<Array<{ __typename?: 'FileNode', id: string, name: string, description: string, isFolder: boolean, state: NodeState, mimeType?: Maybe<string>, size: number }>> } };
+
+export type RemoveFileNodeMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type RemoveFileNodeMutation = { __typename?: 'Mutation', removeFileNode: string };
 
 export const FileNodeFragmentDoc = gql`
     fragment FileNode on FileNode {
@@ -166,3 +191,34 @@ export function useGetFileNodeLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type GetFileNodeQueryHookResult = ReturnType<typeof useGetFileNodeQuery>;
 export type GetFileNodeLazyQueryHookResult = ReturnType<typeof useGetFileNodeLazyQuery>;
 export type GetFileNodeQueryResult = Apollo.QueryResult<GetFileNodeQuery, GetFileNodeQueryVariables>;
+export const RemoveFileNodeDocument = gql`
+    mutation RemoveFileNode($id: ID!) {
+  removeFileNode(id: $id)
+}
+    `;
+export type RemoveFileNodeMutationFn = Apollo.MutationFunction<RemoveFileNodeMutation, RemoveFileNodeMutationVariables>;
+
+/**
+ * __useRemoveFileNodeMutation__
+ *
+ * To run a mutation, you first call `useRemoveFileNodeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRemoveFileNodeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [removeFileNodeMutation, { data, loading, error }] = useRemoveFileNodeMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useRemoveFileNodeMutation(baseOptions?: Apollo.MutationHookOptions<RemoveFileNodeMutation, RemoveFileNodeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RemoveFileNodeMutation, RemoveFileNodeMutationVariables>(RemoveFileNodeDocument, options);
+      }
+export type RemoveFileNodeMutationHookResult = ReturnType<typeof useRemoveFileNodeMutation>;
+export type RemoveFileNodeMutationResult = Apollo.MutationResult<RemoveFileNodeMutation>;
+export type RemoveFileNodeMutationOptions = Apollo.BaseMutationOptions<RemoveFileNodeMutation, RemoveFileNodeMutationVariables>;

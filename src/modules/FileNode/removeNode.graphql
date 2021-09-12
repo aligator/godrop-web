@@ -1,0 +1,3 @@
+mutation RemoveFileNode($id: ID!) {
+    removeFileNode(id: $id)
+}

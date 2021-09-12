@@ -1,8 +1,8 @@
 import React, {ChangeEvent, useCallback, useState} from 'react';
-import {useCreateFileNodeMutation} from "../../api/types";
 import {faFolderPlus} from '@fortawesome/free-solid-svg-icons'
 import {FileNodeState} from "./state";
 import {InputButton} from "../../components/InputButton";
+import {useCreateFileNodeMutation} from "../../api/types";
 
 interface Props {
     state: FileNodeState

@@ -1,18 +1,20 @@
-import React, {useCallback, useMemo} from 'react';
+import React, {memo, useCallback, useMemo} from 'react';
 import {FileNodeState} from "./state";
 import {Col, DataTable} from "../../components/DataTable";
-import {FileNode} from "../../api/types";
 import {useSideDrawer} from "../../components/SideDrawer";
 import {IconButton} from "../../components/Button";
-import { faDownload } from '@fortawesome/free-solid-svg-icons'
+import { faDownload, faTrash } from '@fortawesome/free-solid-svg-icons'
 import {download} from "../../api/file";
+import {FileNode, useRemoveFileNodeMutation} from "../../api/types";
 
 interface Props {
     state: FileNodeState
 }
 
-export const ChildList: React.FC<Props> = ({state: {currentPath, change, node, loading}}) => {
+export const ChildList: React.FC<Props> = memo(({state: {currentPath, change, node, loading, reload}}) => {
     const { handleOpen } = useSideDrawer()
+    const [removeFileNodeMutation] = useRemoveFileNodeMutation()
+
     const handleNavigateToChild = useCallback((newPath: string) => {
         change(`${currentPath}/${newPath}`)
     }, [change, currentPath])
@@ -24,16 +26,33 @@ export const ChildList: React.FC<Props> = ({state: {currentPath, change, node, l
     }, [handleOpen])
 
     const handleDownload = useCallback((row: FileNode) => () => download(row), [])
+    const handleDelete = useCallback((row: FileNode) => () => {
+        removeFileNodeMutation({
+            variables: {
+                id: row.id
+            }
+        }).then(() => {
+            console.log(currentPath)
+            reload()
+        })
+    }, [currentPath, reload, removeFileNodeMutation])
 
     const columns: Col<FileNode>[] = useMemo(() => [
         {
-            id: "download",
-            name: "Download",
+            id: "actions",
+            name: "Actions",
             Cell: ({row, className}) => {
                 if (row.isFolder) {
-                    return <></>
+                    return <div className="flex flex-row">
+                        <IconButton icon={faTrash} onClick={handleDelete(row)} />
+                    </div>
                 }
-                return <IconButton icon={faDownload} onClick={handleDownload(row)} />
+                return (
+                    <div className="flex flex-row">
+                        <IconButton icon={faDownload} onClick={handleDownload(row)} />
+                        <IconButton icon={faTrash} onClick={handleDelete(row)} />
+                    </div>
+                )
             }
         },
         {
@@ -53,7 +72,7 @@ export const ChildList: React.FC<Props> = ({state: {currentPath, change, node, l
                 return <div className={className}>{row.isFolder ? "Folder" : row.mimeType}</div>
             }
         }
-    ], [])
+    ], [handleDelete, handleDownload])
 
     if (loading) {
         return <div>Loading...</div>
@@ -72,5 +91,5 @@ export const ChildList: React.FC<Props> = ({state: {currentPath, change, node, l
             />
         </>
     )
-};
+});
 

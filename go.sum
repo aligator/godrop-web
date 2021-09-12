@@ -6,8 +6,8 @@ github.com/agnivade/levenshtein v1.0.3 h1:M5ZnqLOoZR8ygVq0FfkXsNOKzMCk0xRiow0R5+
 github.com/agnivade/levenshtein v1.0.3/go.mod h1:4SFRZbbXWLF4MU1T9Qg0pGgH3Pjs+t6ie5efyrwRJXs=
 github.com/aligator/checkpoint v0.0.3 h1:cbxQQTQFidB3N3sclkQOJpZqkR7gPfPjnZaRB3vshS0=
 github.com/aligator/checkpoint v0.0.3/go.mod h1:hUKnRoj49H3F14uPqUTVERw3r3QCWdYx40gcdKnVE24=
-github.com/aligator/godrop v0.1.3 h1:OLqDan1aRV/+4GT7ApwKjbev91JSHDkaLQ1Co5vGH/Y=
-github.com/aligator/godrop v0.1.3/go.mod h1:EqVz6zWfF0I4dL4kXbJ5PLCReGOH20/TYdkfvPt0cBk=
+github.com/aligator/godrop v0.1.5 h1:pHZcq952aqWsHe55PqcCq9oLjKoCYZxz73FY9q1lOIA=
+github.com/aligator/godrop v0.1.5/go.mod h1:EqVz6zWfF0I4dL4kXbJ5PLCReGOH20/TYdkfvPt0cBk=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883 h1:bvNMNQO63//z+xNgfBlViaCIJKLlCJ6/fmUseuG0wVQ=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
 github.com/arbovm/levenshtein v0.0.0-20160628152529-48b4e1c0c4d0 h1:jfIu9sQUG6Ig+0+Ap1h4unLjW6YQJpKZVmUzxsD4E/Q=
