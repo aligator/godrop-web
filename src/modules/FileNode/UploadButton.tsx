@@ -43,7 +43,6 @@ export const UploadButton: React.FC<Props> = ({state: {currentPath, reload}}) =>
             reload()
             return node
         }).then((node) => {
-            console.log(node)
             return upload(`${node.data?.createFileNode.id}`, newFile)
         }).then(reload)
     }, [selectedFile, createFileNodeMutation, currentPath, reload])

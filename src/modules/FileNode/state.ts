@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useState} from "react";
 import {GetFileNodeQuery, useGetFileNodeQuery} from "../../api/types";
 
 export interface FileNodeStateProps {
@@ -33,13 +33,8 @@ export function useNodeState({initialPath}: FileNodeStateProps): FileNodeState {
         })
     }
 
-    useEffect(() => {
-        console.log("changed path", path)
-    }, [path])
-
     const reload = useCallback(() => {
-        console.log("reload ", path)
-        refetch({path})
+        void refetch({path})
     }, [refetch, path])
 
     return {

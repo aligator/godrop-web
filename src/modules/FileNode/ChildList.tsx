@@ -31,21 +31,20 @@ export const ChildList: React.FC<Props> = memo(({state: {currentPath, change, no
             variables: {
                 id: row.id
             }
-        }).then(() => {
-            console.log(currentPath)
-            reload()
-        })
-    }, [currentPath, reload, removeFileNodeMutation])
+        }).then(reload)
+    }, [reload, removeFileNodeMutation])
 
     const columns: Col<FileNode>[] = useMemo(() => [
         {
             id: "actions",
             name: "Actions",
-            Cell: ({row, className}) => {
+            Cell: ({row}) => {
                 if (row.isFolder) {
-                    return <div className="flex flex-row">
-                        <IconButton icon={faTrash} onClick={handleDelete(row)} />
-                    </div>
+                    return (
+                        <div className="flex flex-row">
+                            <IconButton icon={faTrash} onClick={handleDelete(row)} />
+                        </div>
+                    )
                 }
                 return (
                     <div className="flex flex-row">
