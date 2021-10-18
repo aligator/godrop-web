@@ -73,5 +73,6 @@ func main() {
 
 	router := s.Init()
 	serveFrontend(router)
+	s.Logger.Printf("connect to http://%s to access the GoDrop web frontend", s.Host)
 	s.Run()
 }
