@@ -8,7 +8,7 @@ import {ActionToolbar} from "../modules/FileNode/ActionToolbar";
 interface Props {
 }
 
-export const FileExplorerPage: React.FC<Props> = ({}) => {
+export const FileExplorerPage: React.FC<Props> = () => {
     const selectedNode = useNodeState({initialPath: ""})
 
     return (

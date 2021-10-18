@@ -35,33 +35,33 @@ jobs:
       - name: Build and pack godrop for Linux
         run: |
           GOOS=linux GOARCH=amd64 make
-          cp .target/godrop godrop
+          cp .target/godrop-web godrop-web
           tar -czf godrop-linux-amd64.tar.gz godrop
       - name: Build and pack godrop for Linux ARMv7
         run: |
           GOOS=linux GOARCH=arm GOARM=7 make
-          cp .target/godrop godrop
+          cp .target/godrop-web godrop-web
           tar -czf godrop-linux-armv7.tar.gz godrop
       - name: Build and pack godrop for Linux ARM64
         run: |
           GOOS=linux GOARCH=arm64 make
-          cp .target/godrop godrop
+          cp .target/godrop-web godrop-web
           tar -czf godrop-linux-arm64.tar.gz godrop
       - name: Build and pack godrop for macOS
         run: |
           GOOS=darwin GOARCH=amd64 make
-          cp .target/godrop godrop
+          cp .target/godrop-web godrop-web
           tar -czf godrop-macos-amd64.tar.gz godrop
       - name: Build and pack godrop for macOS ARM64 (M1)
         run: |
           GOOS=darwin GOARCH=arm64 make
-          cp .target/godrop godrop
+          cp .target/godrop-web godrop-web
           tar -czf godrop-macos-arm64.tar.gz godrop
       - name: Build and pack godrop for Windows
         run: |
           GOOS=windows GOARCH=amd64 make
-          cp .target/godrop.exe godrop.exe
-          zip godrop-windows-amd64.zip godrop.exe
+          cp .target/godrop-web.exe godrop-web.exe
+          zip godrop-windows-amd64.zip godrop-web.exe
       - name: Get the version
         id: get_version
         run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
