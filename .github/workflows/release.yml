@@ -1,0 +1,81 @@
+name: release
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go 1.16
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.16
+        id: go
+
+      - name: Set up node 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+
+      - name: Get dependencies
+        run: |
+          go get -v -t -d ./...
+
+      - name: Get Go dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build frontend
+        run: yarn build
+
+      - name: Build and pack godrop for Linux
+        run: |
+          GOOS=linux GOARCH=amd64 make
+          cp .target/godrop godrop
+          tar -czf godrop-linux-amd64.tar.gz godrop
+      - name: Build and pack godrop for Linux ARMv7
+        run: |
+          GOOS=linux GOARCH=arm GOARM=7 make
+          cp .target/godrop godrop
+          tar -czf godrop-linux-armv7.tar.gz godrop
+      - name: Build and pack godrop for Linux ARM64
+        run: |
+          GOOS=linux GOARCH=arm64 make
+          cp .target/godrop godrop
+          tar -czf godrop-linux-arm64.tar.gz godrop
+      - name: Build and pack godrop for macOS
+        run: |
+          GOOS=darwin GOARCH=amd64 make
+          cp .target/godrop godrop
+          tar -czf godrop-macos-amd64.tar.gz godrop
+      - name: Build and pack godrop for macOS ARM64 (M1)
+        run: |
+          GOOS=darwin GOARCH=arm64 make
+          cp .target/godrop godrop
+          tar -czf godrop-macos-arm64.tar.gz godrop
+      - name: Build and pack godrop for Windows
+        run: |
+          GOOS=windows GOARCH=amd64 make
+          cp .target/godrop.exe godrop.exe
+          zip godrop-windows-amd64.zip godrop.exe
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ steps.get_version.outputs.VERSION }}"
+          prerelease: false
+          title: "godrop ${{ steps.get_version.outputs.VERSION }}"
+          files: |
+            godrop-linux-amd64.tar.gz
+            godrop-linux-armv7.tar.gz
+            godrop-linux-arm64.tar.gz
+            godrop-macos-amd64.tar.gz
+            godrop-macos-arm64.tar.gz
+            godrop-windows-amd64.zip
